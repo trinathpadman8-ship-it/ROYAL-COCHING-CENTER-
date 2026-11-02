@@ -1,0 +1,6 @@
+{
+  "name": "Royal Coaching Center",
+  "description": "Fee collection and receipt portal for Royal Coaching Center, Tikarigaon, Kandhamal (Classes 1 to 8).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

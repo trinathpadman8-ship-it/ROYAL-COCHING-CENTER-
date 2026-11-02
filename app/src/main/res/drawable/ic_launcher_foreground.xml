@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Golden circular frame -->
+    <path
+        android:pathData="M 54,24 A 30,30 0 1,1 53.9,24 Z"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="2.5"
+        android:fillColor="#00000000" />
+    <path
+        android:pathData="M 54,26.5 A 27.5,27.5 0 1,1 53.9,26.5 Z"
+        android:strokeColor="#FFDF73"
+        android:strokeWidth="1"
+        android:fillColor="#00000000" />
+
+    <!-- Royal Crown (Center Top) -->
+    <path
+        android:pathData="M 38,48 L 41,36 L 47,42 L 54,32 L 61,42 L 67,36 L 70,48 Z"
+        android:fillColor="#FFDF73" />
+    <path
+        android:pathData="M 37,48 L 71,48 L 71,51 L 37,51 Z"
+        android:fillColor="#D4AF37" />
+    <!-- Crown Jewels -->
+    <path
+        android:pathData="M 41,34 A 1.5,1.5 0 1,1 40.9,34 Z
+                          M 54,30 A 2,2 0 1,1 53.9,30 Z
+                          M 67,34 A 1.5,1.5 0 1,1 66.9,34 Z"
+        android:fillColor="#FFFFFF" />
+
+    <!-- Open Book (Center Bottom) -->
+    <!-- Left page -->
+    <path
+        android:pathData="M 53,56 C 47,54 40,54 36,56 L 36,68 C 40,66 47,66 53,68 Z"
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1" />
+    <!-- Right page -->
+    <path
+        android:pathData="M 55,56 C 61,54 68,54 72,56 L 72,68 C 68,66 61,66 55,68 Z"
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#D4AF37"
+        android:strokeWidth="1" />
+    <!-- Book Spine -->
+    <path
+        android:pathData="M 53,68 C 53.5,69 54.5,69 55,68 L 55,56 C 54.5,56.5 53.5,56.5 53,56 Z"
+        android:fillColor="#D4AF37" />
+</vector>

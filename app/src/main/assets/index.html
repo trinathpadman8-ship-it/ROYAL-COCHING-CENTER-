@@ -1,0 +1,2385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="theme-color" content="#0B1E36">
+  <meta name="description" content="Fee Collection Portal - Royal Coaching Center, Tikarigaon, Kandhamal (Classes 1 to 8)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Royal Coaching">
+  <title>ROYAL COACHING CENTER - Fee Collection</title>
+
+  <!-- Embedded Web App Manifest for instant Add to Home Screen -->
+  <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22Royal%20Coaching%20Center%22%2C%22short_name%22%3A%22Royal%20Fee%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230B1E36%22%2C%22theme_color%22%3A%22%230B1E36%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20100%20100%27%3E%3Ccircle%20cx%3D%2750%27%20cy%3D%2750%27%20r%3D%2748%27%20fill%3D%27%230B1E36%27%20stroke%3D%27%23D4AF37%27%20stroke-width%3D%274%27%2F%3E%3Cpath%20d%3D%27M30%2C45%20L35%2C30%20L42%2C38%20L50%2C26%20L58%2C38%20L65%2C30%20L70%2C45%20Z%27%20fill%3D%27%23FFDF73%27%2F%3E%3Cpath%20d%3D%27M30%2C55%20Q50%2C50%2050%2C65%20Q50%2C50%2070%2C55%20L70%2C75%20Q50%2C70%2050%2C80%20Q50%2C70%2030%2C75%20Z%27%20fill%3D%27%23FFFFFF%27%20stroke%3D%27%23D4AF37%27%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+
+  <style>
+    :root {
+      --bg-page: #0B1E36;
+      --bg-card: #FFFFFF;
+      --bg-card-subtle: #F8FAFC;
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --text-light: #94A3B8;
+      --border-color: #E2E8F0;
+      --primary: #0F2C59;
+      --primary-hover: #071933;
+      --gold: #D4AF37;
+      --gold-light: #FFDF73;
+      --gold-dark: #A67C00;
+      --danger: #DC2626;
+      --success: #16A34A;
+      --accent: #2563EB;
+      --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(212, 175, 55, 0.25);
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #050E1A;
+      --bg-card: #0F2036;
+      --bg-card-subtle: #172A45;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      --text-light: #64748B;
+      --border-color: #243B5A;
+      --primary: #FFDF73;
+      --primary-hover: #FFEBA4;
+      --gold: #FFDF73;
+      --gold-light: #FFF2C2;
+      --gold-dark: #C99700;
+      --card-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 223, 115, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 12px 36px 12px;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* PWA Install Banner */
+    #pwaInstallBanner {
+      display: none;
+      background: linear-gradient(135deg, #0f2c59, #1e3a8a);
+      color: #fff;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      max-width: 620px;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    #pwaInstallBanner button {
+      background: var(--gold);
+      color: #07172C;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      cursor: pointer;
+    }
+
+    /* Top Action Bar (Theme toggle, Center contact) */
+    .top-bar {
+      width: 100%;
+      max-width: 620px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+    .badge-location {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .theme-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .apk-download-btn {
+      background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+      color: #FFFFFF !important;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.35);
+      transition: all 0.2s;
+    }
+    .apk-download-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.5);
+    }
+
+    /* Main Container (College Fee Form Card) */
+    .app-card {
+      background-color: var(--bg-card);
+      width: 100%;
+      max-width: 620px;
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-color);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+    }
+
+    /* Header Banner with SVG Seal */
+    .header-banner {
+      background: linear-gradient(180deg, #07172C 0%, #0F2C59 100%);
+      padding: 24px 16px 20px 16px;
+      text-align: center;
+      border-bottom: 3px solid var(--gold);
+      position: relative;
+    }
+
+    .logo-container {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 12px auto;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.45));
+      transition: transform 0.3s ease;
+    }
+    .logo-container:hover {
+      transform: scale(1.03);
+    }
+    .logo-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .center-title {
+      color: #FFFFFF;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      font-family: Georgia, serif;
+    }
+    .center-subtitle {
+      color: var(--gold-light);
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .center-tagline {
+      color: #CBD5E1;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* College Tab Bar */
+    .tab-bar {
+      display: flex;
+      background-color: var(--bg-card-subtle);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0;
+    }
+    .tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 14px 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover {
+      color: var(--text-main);
+      background: rgba(0,0,0,0.02);
+    }
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--gold);
+      background-color: var(--bg-card);
+    }
+    [data-theme="dark"] .tab-btn.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+      background-color: var(--bg-card);
+    }
+    .tab-badge {
+      background: var(--gold);
+      color: #07172C;
+      font-size: 0.72rem;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-weight: 800;
+    }
+
+    /* Content Area */
+    .content-area {
+      padding: 20px 20px 28px 20px;
+    }
+
+    .form-heading {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px dashed var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-main);
+    }
+    .form-heading span.badge-official {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gold-dark);
+      background: rgba(212, 175, 55, 0.12);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    [data-theme="dark"] .form-heading span.badge-official {
+      color: var(--gold-light);
+    }
+
+    /* Form Fields Grid & Styling */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 480px) {
+      .form-grid.two-cols {
+        grid-template-columns: 1fr 1fr;
+      }
+      .col-span-2 {
+        grid-column: span 2;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+    .form-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .req-star {
+      color: var(--danger);
+      font-weight: 900;
+      font-size: 1rem;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      min-height: 48px;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background-color: var(--bg-card-subtle);
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+      background-color: var(--bg-card);
+    }
+    .form-input.is-invalid, .form-select.is-invalid {
+      border-color: var(--danger) !important;
+      background-color: rgba(220, 38, 38, 0.04);
+    }
+    .input-error {
+      color: var(--danger);
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-top: 2px;
+      display: none;
+    }
+    .form-input.is-invalid ~ .input-error,
+    .form-select.is-invalid ~ .input-error {
+      display: block;
+    }
+
+    /* Phone Input with +91 Prefix */
+    .phone-input-wrapper {
+      display: flex;
+      align-items: center;
+    }
+    .phone-prefix {
+      background: var(--bg-card-subtle);
+      border: 1.5px solid var(--border-color);
+      border-right: none;
+      border-radius: 10px 0 0 10px;
+      height: 48px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .phone-input-wrapper .form-input {
+      border-radius: 0 10px 10px 0;
+    }
+
+    /* Amount Chips */
+    .amount-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .amount-chip {
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .amount-chip:hover, .amount-chip.active {
+      background: var(--gold);
+      color: #07172C;
+      border-color: var(--gold-dark);
+    }
+
+    /* Payment Mode Radio Cards */
+    .payment-modes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .mode-card {
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 10px;
+      cursor: pointer;
+      background: var(--bg-card-subtle);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .mode-card:hover {
+      border-color: var(--gold);
+    }
+    .mode-card.selected {
+      border-color: var(--gold);
+      background: rgba(212, 175, 55, 0.1);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .mode-card input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .mode-icon {
+      font-size: 1.4rem;
+    }
+    .mode-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .mode-desc {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* Confirmation Checkbox */
+    .confirm-box {
+      margin-top: 10px;
+      background: var(--bg-card-subtle);
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .confirm-box input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: #0F2C59;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .confirm-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+      user-select: none;
+    }
+
+    /* Big Submit Button */
+    .btn-submit {
+      width: 100%;
+      min-height: 54px;
+      background: linear-gradient(135deg, #07172C 0%, #0F2C59 100%);
+      color: #FFDF73;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 14px rgba(7, 23, 44, 0.4);
+      transition: all 0.2s ease;
+      margin-top: 10px;
+    }
+    [data-theme="dark"] .btn-submit {
+      background: linear-gradient(135deg, #FFDF73 0%, #D4AF37 100%);
+      color: #07172C;
+      border: none;
+      box-shadow: 0 4px 16px rgba(255, 223, 115, 0.3);
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    }
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    /* Receipt Section / Modal */
+    #receiptView {
+      display: none;
+    }
+    .receipt-container {
+      background: var(--bg-card);
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .receipt-ribbon {
+      background: #16A34A;
+      color: #FFFFFF;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    .receipt-header {
+      text-align: center;
+      border-bottom: 2px dashed var(--border-color);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+    }
+    .receipt-center-name {
+      font-family: Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    [data-theme="dark"] .receipt-center-name {
+      color: var(--gold);
+    }
+    .receipt-loc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .receipt-no-date {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .receipt-no-val {
+      color: var(--accent);
+      font-family: monospace;
+      font-size: 0.95rem;
+    }
+
+    .receipt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 0.88rem;
+    }
+    .receipt-table tr {
+      border-bottom: 1px solid var(--border-color);
+    }
+    .receipt-table td {
+      padding: 8px 6px;
+    }
+    .receipt-table td.label-cell {
+      color: var(--text-muted);
+      font-weight: 600;
+      width: 40%;
+    }
+    .receipt-table td.val-cell {
+      color: var(--text-main);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .receipt-total-box {
+      background: var(--bg-card-subtle);
+      border: 1.5px solid var(--gold);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 14px 0;
+    }
+    .total-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .total-amount-val {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+    [data-theme="dark"] .total-amount-val {
+      color: var(--gold);
+    }
+
+    /* Payment Specific Actions */
+    .receipt-pay-actions {
+      margin: 18px 0 10px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-pay-phonepe {
+      background: #5f259f;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 10px rgba(95, 37, 159, 0.35);
+      text-decoration: none;
+    }
+    .btn-pay-upi-all {
+      background: #0284C7;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.35);
+      text-decoration: none;
+    }
+    .btn-whatsapp {
+      background: #25D366;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .btn-secondary-receipt {
+      background: var(--bg-card-subtle);
+      color: var(--text-main);
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      padding: 11px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-secondary-receipt:hover {
+      border-color: var(--gold);
+    }
+
+    /* QR Code Display Card */
+    .qr-card {
+      text-align: center;
+      background: var(--bg-card-subtle);
+      border: 1.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .qr-box {
+      background: #FFFFFF;
+      padding: 12px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .qr-box svg, .qr-box canvas {
+      display: block;
+    }
+    .qr-hint {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Cash Note Box */
+    .cash-note-box {
+      background: rgba(212, 175, 55, 0.12);
+      border: 1.5px solid var(--gold);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cash-note-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .cash-note-text {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    /* Copy UPI row */
+    .upi-id-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card-subtle);
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-family: monospace;
+      color: var(--text-main);
+      font-weight: 700;
+      cursor: pointer;
+      user-select: all;
+    }
+
+    /* Toast Notification */
+    #toastNotice {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      border: 1px solid var(--gold);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      z-index: 9999;
+    }
+    #toastNotice.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Records Tab */
+    .records-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .stat-card {
+      background: var(--bg-card-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 2px;
+    }
+    [data-theme="dark"] .stat-value {
+      color: var(--gold);
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+    }
+    .search-input {
+      flex: 1;
+      height: 42px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-card-subtle);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: var(--gold);
+    }
+    .filter-select {
+      height: 42px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-card-subtle);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .record-card {
+      background: var(--bg-card-subtle);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .record-card:hover {
+      border-color: var(--gold);
+    }
+    .record-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .record-student-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+    .record-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .record-amount {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #16A34A;
+      text-align: right;
+    }
+    .record-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .badge-mode {
+      background: rgba(15, 44, 89, 0.1);
+      border: 1px solid var(--border-color);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .record-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 8px;
+      justify-content: flex-end;
+    }
+    .btn-sm-view {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--accent);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-sm-delete {
+      background: transparent;
+      border: 1px solid rgba(220, 38, 38, 0.3);
+      color: var(--danger);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-sm-delete.confirming {
+      background: var(--danger);
+      color: #FFFFFF;
+      border-color: var(--danger);
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes pulse {
+      from { opacity: 0.85; }
+      to { opacity: 1; }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 36px 16px;
+      color: var(--text-muted);
+    }
+    .empty-icon {
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+    }
+
+    /* Setup Tab */
+    .setup-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+    .btn-save-setup {
+      background: var(--gold);
+      color: #07172C;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+      min-height: 48px;
+      padding: 12px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 14px;
+      transition: all 0.2s;
+    }
+    .btn-save-setup:hover {
+      background: var(--gold-light);
+    }
+
+    /* Hosting Guide Box */
+    .hosting-guide-box {
+      margin-top: 24px;
+      background: var(--bg-card-subtle);
+      border: 1.5px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .guide-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .guide-steps {
+      padding-left: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .guide-steps li {
+      margin-bottom: 6px;
+    }
+
+    /* Print styling */
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        padding: 0 !important;
+      }
+      .top-bar, .tab-bar, .receipt-pay-actions, .btn-secondary-receipt, #pwaInstallBanner {
+        display: none !important;
+      }
+      .app-card {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+      }
+      .receipt-container {
+        border: 2px solid #000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PWA Add to Home Screen Banner -->
+  <div id="pwaInstallBanner">
+    <div>
+      <strong>Install Royal Coaching App</strong>
+      <div style="font-size:0.75rem; opacity:0.9;">One-tap access on your phone screen</div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button onclick="installPwa()" id="btnPwaAction">Install</button>
+      <button onclick="dismissPwaBanner()" style="background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.4);">✕</button>
+    </div>
+  </div>
+
+  <!-- Top Status & Theme Bar -->
+  <div class="top-bar">
+    <div class="badge-location">
+      📍 Tikarigaon | Classes 1-8
+    </div>
+    <div style="display:flex; gap:6px; align-items:center;">
+      <a href="royal-coaching.apk" download="Royal_Coaching_Center.apk" class="apk-download-btn" title="Download Android APK">
+        <span>📲</span> <span>Download APK</span>
+      </a>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle Theme">
+        <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Card Container -->
+  <div class="app-card">
+
+    <!-- Header Banner with Circular SVG Logo -->
+    <div class="header-banner">
+      <div class="logo-container">
+        <!-- Circular Emblem SVG (Navy Ring, Gold Border, Curved Text, Crown & Open Book) -->
+        <svg class="logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFF2C2"/>
+              <stop offset="50%" stop-color="#D4AF37"/>
+              <stop offset="100%" stop-color="#996515"/>
+            </linearGradient>
+            <linearGradient id="navyInner" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#142C4F"/>
+              <stop offset="100%" stop-color="#07172C"/>
+            </linearGradient>
+            <!-- Arc for Royal Coaching Center (Top) -->
+            <path id="topTextArc" d="M 28 100 A 72 72 0 0 1 172 100" fill="none"/>
+            <!-- Arc for Tikarigaon, Kandhamal (Bottom) -->
+            <path id="bottomTextArc" d="M 172 100 A 72 72 0 0 1 28 100" fill="none"/>
+          </defs>
+
+          <!-- Outer Gold Beaded Circle -->
+          <circle cx="100" cy="100" r="98" fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-dasharray="3 2"/>
+          <circle cx="100" cy="100" r="94" fill="#07172C" stroke="url(#goldGrad)" stroke-width="2.5"/>
+
+          <!-- Navy Ring -->
+          <circle cx="100" cy="100" r="92" fill="#0B2545"/>
+          <circle cx="100" cy="100" r="69" fill="url(#navyInner)" stroke="url(#goldGrad)" stroke-width="2"/>
+
+          <!-- Decorative Stars on Ring Sides -->
+          <path d="M 21 100 L 23 96 L 27 96 L 24 99 L 25 103 L 21 101 L 17 103 L 18 99 L 15 96 L 19 96 Z" fill="url(#goldGrad)"/>
+          <path d="M 179 100 L 181 96 L 185 96 L 182 99 L 183 103 L 179 101 L 175 103 L 176 99 L 173 96 L 177 96 Z" fill="url(#goldGrad)"/>
+
+          <!-- Curved Text: Top & Bottom -->
+          <text font-family="'Times New Roman', Georgia, serif" font-weight="900" font-size="11.2" fill="url(#goldGrad)" letter-spacing="1.4">
+            <textPath href="#topTextArc" startOffset="50%" text-anchor="middle">ROYAL COACHING CENTER</textPath>
+          </text>
+          <text font-family="Arial, sans-serif" font-weight="800" font-size="8.8" fill="url(#goldGrad)" letter-spacing="1.1">
+            <textPath href="#bottomTextArc" startOffset="50%" text-anchor="middle">TIKARIGAON, KANDHAMAL</textPath>
+          </text>
+
+          <!-- Center Emblem: Crown & Book -->
+          <g transform="translate(100, 99)">
+            <!-- Royal Crown -->
+            <path d="M -26 -14 L -20 -35 L -9 -24 L 0 -38 L 9 -24 L 20 -35 L 26 -14 C 18 -11 0 -11 -26 -14 Z" fill="url(#goldGrad)"/>
+            <!-- Crown Base Ribbon -->
+            <rect x="-26" y="-14" width="52" height="4" rx="2" fill="#FFEBA4"/>
+            <circle cx="-16" cy="-12" r="1.3" fill="#DC2626"/>
+            <circle cx="0" cy="-12" r="1.5" fill="#2563EB"/>
+            <circle cx="16" cy="-12" r="1.3" fill="#DC2626"/>
+            <!-- Crown Peak Pearls -->
+            <circle cx="-20" cy="-35" r="1.8" fill="#FFFFFF"/>
+            <circle cx="0" cy="-38" r="2.2" fill="#FFFFFF"/>
+            <circle cx="20" cy="-35" r="1.8" fill="#FFFFFF"/>
+
+            <!-- Open Book -->
+            <!-- Left page -->
+            <path d="M -27 18 C -27 9 -15 7 0 12 L 0 28 C -15 23 -27 25 -27 28 Z" fill="#FFFFFF"/>
+            <!-- Right page -->
+            <path d="M 27 18 C 27 9 15 7 0 12 L 0 28 C 15 23 27 25 27 28 Z" fill="#FFFFFF"/>
+            <!-- Book Spine -->
+            <path d="M -28 18 C -28 30 -16 28 0 33 C 16 28 28 30 28 18 L 28 20 C 28 32 16 30 0 35 C -16 30 -28 32 -28 20 Z" fill="url(#goldGrad)"/>
+            <!-- Page Text Lines -->
+            <line x1="-22" y1="15" x2="-5" y2="17" stroke="#334E68" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="-22" y1="19.5" x2="-5" y2="21.5" stroke="#334E68" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="-22" y1="24" x2="-7" y2="25.5" stroke="#334E68" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="5" y1="17" x2="22" y2="15" stroke="#334E68" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="5" y1="21.5" x2="22" y2="19.5" stroke="#334E68" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="7" y1="25.5" x2="22" y2="24" stroke="#334E68" stroke-width="1.2" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+
+      <h1 class="center-title">Royal Coaching Center</h1>
+      <div class="center-subtitle">Tikarigaon, Kandhamal (Odisha)</div>
+      <div class="center-tagline">Academic Fee Portal • Class 1 to Class 8</div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tab-bar">
+      <button class="tab-btn active" id="tabPay" onclick="switchTab('pay')">
+        <span>📝</span> Pay Fee
+      </button>
+      <button class="tab-btn" id="tabRecords" onclick="switchTab('records')">
+        <span>📑</span> Records <span class="tab-badge" id="recordCountBadge">0</span>
+      </button>
+      <button class="tab-btn" id="tabSetup" onclick="switchTab('setup')">
+        <span>⚙️</span> Setup
+      </button>
+    </div>
+
+    <div class="content-area">
+
+      <!-- ================= 1. PAY FEE TAB ================= -->
+      <div id="payFeeView">
+
+        <form id="feeForm" onsubmit="handleFeeSubmit(event)" novalidate>
+          <div class="form-heading">
+            <span>Student & Fee Details</span>
+            <span class="badge-official">Academic Session 2026-27</span>
+          </div>
+
+          <div class="form-grid two-cols">
+            <!-- Student Name -->
+            <div class="form-group col-span-2">
+              <label class="form-label" for="studentName">
+                Student Full Name <span class="req-star">*</span>
+              </label>
+              <input type="text" id="studentName" class="form-input" placeholder="e.g. Rahul Nayak" required>
+              <div class="input-error" id="err_studentName">Please enter a valid student name (at least 2 letters).</div>
+            </div>
+
+            <!-- Class (1 to 8) -->
+            <div class="form-group">
+              <label class="form-label" for="studentClass">
+                Class <span class="req-star">*</span>
+              </label>
+              <select id="studentClass" class="form-select" required onchange="applyClassFeePreset(this.value)">
+                <option value="">Select Class</option>
+                <option value="Class 1">Class 1</option>
+                <option value="Class 2">Class 2</option>
+                <option value="Class 3">Class 3</option>
+                <option value="Class 4">Class 4</option>
+                <option value="Class 5">Class 5</option>
+                <option value="Class 6">Class 6</option>
+                <option value="Class 7">Class 7</option>
+                <option value="Class 8">Class 8</option>
+              </select>
+              <div class="input-error" id="err_studentClass">Please select the student's class.</div>
+            </div>
+
+            <!-- Roll Number -->
+            <div class="form-group">
+              <label class="form-label" for="rollNo">
+                Roll Number <span class="req-star">*</span>
+              </label>
+              <input type="number" id="rollNo" class="form-input" placeholder="e.g. 15" min="1" max="999" required>
+              <div class="input-error" id="err_rollNo">Please enter a valid roll number.</div>
+            </div>
+
+            <!-- Father's Name -->
+            <div class="form-group">
+              <label class="form-label" for="fatherName">
+                Father's Name <span class="req-star">*</span>
+              </label>
+              <input type="text" id="fatherName" class="form-input" placeholder="e.g. Santosh Nayak" required>
+              <div class="input-error" id="err_fatherName">Please enter father's name.</div>
+            </div>
+
+            <!-- Mother's Name -->
+            <div class="form-group">
+              <label class="form-label" for="motherName">
+                Mother's Name <span class="req-star">*</span>
+              </label>
+              <input type="text" id="motherName" class="form-input" placeholder="e.g. Sunita Nayak" required>
+              <div class="input-error" id="err_motherName">Please enter mother's name.</div>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="form-group">
+              <label class="form-label" for="dob">
+                Date of Birth <span class="req-star">*</span>
+              </label>
+              <input type="date" id="dob" class="form-input" required>
+              <div class="input-error" id="err_dob">Please enter student's date of birth.</div>
+            </div>
+
+            <!-- Admission Date -->
+            <div class="form-group">
+              <label class="form-label" for="admissionDate">
+                Admission Date <span class="req-star">*</span>
+              </label>
+              <input type="date" id="admissionDate" class="form-input" required>
+              <div class="input-error" id="err_admissionDate">Please select admission date.</div>
+            </div>
+
+            <!-- Parent Phone Number (+91, 10 digits) -->
+            <div class="form-group">
+              <label class="form-label" for="parentPhone">
+                Parent WhatsApp / Mobile <span class="req-star">*</span>
+              </label>
+              <div class="phone-input-wrapper">
+                <span class="phone-prefix">+91</span>
+                <input type="tel" id="parentPhone" class="form-input" placeholder="10 digit number" maxlength="10" required>
+              </div>
+              <div class="input-error" id="err_parentPhone">Please enter a valid 10-digit mobile number.</div>
+            </div>
+
+            <!-- Village (default Tikarigaon) -->
+            <div class="form-group">
+              <label class="form-label" for="village">
+                Village / Town <span class="req-star">*</span>
+              </label>
+              <input type="text" id="village" class="form-input" value="Tikarigaon" required>
+              <div class="input-error" id="err_village">Please enter village name.</div>
+            </div>
+
+            <!-- Fee Month (January to December) -->
+            <div class="form-group">
+              <label class="form-label" for="feeMonth">
+                Fee Month <span class="req-star">*</span>
+              </label>
+              <select id="feeMonth" class="form-select" required>
+                <option value="">Select Month</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </select>
+              <div class="input-error" id="err_feeMonth">Please select the fee month.</div>
+            </div>
+
+            <!-- Fee Amount in Rupees -->
+            <div class="form-group">
+              <label class="form-label" for="feeAmount">
+                Fee Amount (₹) <span class="req-star">*</span>
+              </label>
+              <input type="number" id="feeAmount" class="form-input" placeholder="e.g. 500" min="10" required>
+              <div class="amount-chips">
+                <button type="button" class="amount-chip" onclick="setFeeAmount(300)">₹300</button>
+                <button type="button" class="amount-chip" onclick="setFeeAmount(400)">₹400</button>
+                <button type="button" class="amount-chip" onclick="setFeeAmount(500)">₹500</button>
+                <button type="button" class="amount-chip" onclick="setFeeAmount(600)">₹600</button>
+                <button type="button" class="amount-chip" onclick="setFeeAmount(800)">₹800</button>
+              </div>
+              <div class="input-error" id="err_feeAmount">Please enter a valid fee amount (min ₹10).</div>
+            </div>
+
+            <!-- Pay By (UPI App / Scan QR / Cash at Center) -->
+            <div class="form-group col-span-2">
+              <label class="form-label">
+                Payment Method (Pay By) <span class="req-star">*</span>
+              </label>
+              <div class="payment-modes-grid">
+                <label class="mode-card selected" id="card_upi_app" onclick="selectPayMode('upi_app')">
+                  <input type="radio" name="payBy" value="upi_app" checked>
+                  <span class="mode-icon">📱</span>
+                  <span class="mode-title">UPI App</span>
+                  <span class="mode-desc">PhonePe, GPay, Paytm</span>
+                </label>
+
+                <label class="mode-card" id="card_upi_qr" onclick="selectPayMode('upi_qr')">
+                  <input type="radio" name="payBy" value="upi_qr">
+                  <span class="mode-icon">📷</span>
+                  <span class="mode-title">Scan UPI QR</span>
+                  <span class="mode-desc">Instant QR on screen</span>
+                </label>
+
+                <label class="mode-card" id="card_cash" onclick="selectPayMode('cash')">
+                  <input type="radio" name="payBy" value="cash">
+                  <span class="mode-icon">💵</span>
+                  <span class="mode-title">Cash at Center</span>
+                  <span class="mode-desc">Pay at Tikarigaon</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Remarks -->
+            <div class="form-group col-span-2">
+              <label class="form-label" for="remarks">
+                Remarks / Additional Notes (Optional)
+              </label>
+              <input type="text" id="remarks" class="form-input" placeholder="e.g. Tuition + Test series fee">
+            </div>
+
+            <!-- Confirmation Checkbox -->
+            <div class="form-group col-span-2">
+              <label class="confirm-box" for="confirmCheckbox">
+                <input type="checkbox" id="confirmCheckbox" required>
+                <span class="confirm-label">
+                  I confirm that all student details, class, roll number, and fee amount entered above are complete and correct. <span class="req-star">*</span>
+                </span>
+              </label>
+              <div class="input-error" id="err_confirmCheckbox" style="margin-left: 32px;">You must confirm the details before submitting.</div>
+            </div>
+
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-submit" id="btnSubmitFee">
+            <span>SUBMIT & GENERATE RECEIPT</span> <span>➔</span>
+          </button>
+        </form>
+
+      </div><!-- End Pay Fee View -->
+
+      <!-- ================= RECEIPT VIEW ================= -->
+      <div id="receiptView">
+        <div class="receipt-container">
+          <div style="text-align:center;">
+            <div class="receipt-ribbon">
+              <span>✓</span> RECEIPT GENERATED SUCCESSFULLY
+            </div>
+          </div>
+
+          <div class="receipt-header">
+            <div class="receipt-center-name">ROYAL COACHING CENTER</div>
+            <div class="receipt-loc">Tikarigaon, Kandhamal, Odisha • Classes 1 to 8</div>
+            <div style="font-size:0.75rem; font-weight:700; color:var(--gold-dark); margin-top:2px;">OFFICIAL FEE RECEIPT</div>
+
+            <div class="receipt-no-date">
+              <div>Receipt No: <span class="receipt-no-val" id="recNo">-</span></div>
+              <div id="recDate">-</div>
+            </div>
+          </div>
+
+          <table class="receipt-table">
+            <tbody>
+              <tr>
+                <td class="label-cell">Student Name</td>
+                <td class="val-cell" id="recStudentName">-</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Class & Roll No</td>
+                <td class="val-cell" id="recClassRoll">-</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Father's Name</td>
+                <td class="val-cell" id="recFatherName">-</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Parent Contact</td>
+                <td class="val-cell" id="recParentPhone">-</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Village / Town</td>
+                <td class="val-cell" id="recVillage">-</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Fee Month</td>
+                <td class="val-cell" id="recMonth">-</td>
+              </tr>
+              <tr>
+                <td class="label-cell">Payment Mode</td>
+                <td class="val-cell" id="recModeBadge">-</td>
+              </tr>
+              <tr id="recRemarksRow" style="display:none;">
+                <td class="label-cell">Remarks</td>
+                <td class="val-cell" id="recRemarks">-</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="receipt-total-box">
+            <div>
+              <div class="total-title">Total Fee Payable</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);" id="recAmountWords">-</div>
+            </div>
+            <div class="total-amount-val" id="recAmount">₹0</div>
+          </div>
+
+          <!-- Dynamic Mode Actions -->
+          <!-- 1. UPI Apps (PhonePe + GPay/Paytm) -->
+          <div id="payAction_upi_app" class="receipt-pay-actions" style="display:none;">
+            <a href="#" id="linkPhonePe" class="btn-pay-phonepe">
+              <span>🟣</span> Pay with PhonePe
+            </a>
+            <a href="#" id="linkGenericUpi" class="btn-pay-upi-all">
+              <span>⚡</span> Pay with GPay / Paytm / Other UPI
+            </a>
+          </div>
+
+          <!-- 2. QR Code Box -->
+          <div id="payAction_upi_qr" class="qr-card" style="display:none;">
+            <div style="font-size:0.9rem; font-weight:800; color:var(--text-main);">
+              Scan this QR to Pay ₹<span id="qrAmountDisplay">0</span>
+            </div>
+            <div class="qr-box" id="qrContainer"></div>
+            <div class="qr-hint">
+              Open PhonePe, Google Pay, Paytm, or BHIM and scan this code to complete payment.
+            </div>
+          </div>
+
+          <!-- 3. Cash Note -->
+          <div id="payAction_cash" class="cash-note-box" style="display:none;">
+            <span class="cash-note-icon">💵</span>
+            <div class="cash-note-text">
+              <strong>Cash Deposit Required:</strong><br>
+              Please hand over ₹<span id="cashAmountDisplay">0</span> in cash to the coaching center administrator at Tikarigaon, Kandhamal. Receipt is saved in records.
+            </div>
+          </div>
+
+          <!-- General Actions -->
+          <div style="text-align:center; margin: 12px 0 6px 0;">
+            <span class="upi-id-pill" onclick="copyUpiId()" title="Click to copy UPI ID">
+              <span>UPI: <strong id="recUpiIdText">9249079757@ibl</strong></span>
+              <span>📋 Copy</span>
+            </span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:10px;">
+            <a href="#" id="linkWhatsApp" target="_blank" class="btn-whatsapp">
+              <span>💬</span> Send Receipt on WhatsApp
+            </a>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+              <button type="button" class="btn-secondary-receipt" onclick="window.print()">
+                <span>🖨️</span> Print / PDF
+              </button>
+              <button type="button" class="btn-secondary-receipt" onclick="resetToNewFee()">
+                <span>➕</span> Add Another Fee
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- End Receipt View -->
+
+      <!-- ================= 2. RECORDS TAB ================= -->
+      <div id="recordsView" style="display:none;">
+        <div class="records-header">
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-label">Total Receipts</div>
+              <div class="stat-value" id="statTotalCount">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Total Collection</div>
+              <div class="stat-value" id="statTotalAmount">₹0</div>
+            </div>
+          </div>
+
+          <div class="search-row">
+            <input type="text" id="recordSearchInput" class="search-input" placeholder="🔍 Search student, roll, or phone..." oninput="filterRecords()">
+            <select id="recordClassFilter" class="filter-select" onchange="filterRecords()">
+              <option value="">All Classes</option>
+              <option value="Class 1">Class 1</option>
+              <option value="Class 2">Class 2</option>
+              <option value="Class 3">Class 3</option>
+              <option value="Class 4">Class 4</option>
+              <option value="Class 5">Class 5</option>
+              <option value="Class 6">Class 6</option>
+              <option value="Class 7">Class 7</option>
+              <option value="Class 8">Class 8</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="recordsListContainer">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <div style="display:flex; justify-content:space-between; margin-top:16px;">
+          <button type="button" class="btn-secondary-receipt" onclick="exportRecordsCSV()" style="font-size:0.8rem;">
+            <span>📥</span> Export to Excel (CSV)
+          </button>
+          <button type="button" class="btn-secondary-receipt" onclick="confirmClearAllRecords()" style="font-size:0.8rem; color:var(--danger); border-color:rgba(220,38,38,0.3);">
+            <span>🗑️</span> Clear All
+          </button>
+        </div>
+      </div><!-- End Records View -->
+
+      <!-- ================= 3. SETUP TAB ================= -->
+      <div id="setupView" style="display:none;">
+        <div class="form-heading">
+          <span>Center & Payment Setup</span>
+          <span class="badge-official">Settings</span>
+        </div>
+
+        <p class="setup-desc">
+          Configure the default UPI payment address, receiver name, and WhatsApp notification number for Royal Coaching Center. All settings are saved securely on your device.
+        </p>
+
+        <form id="setupForm" onsubmit="handleSaveSetup(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="setupUpiId">
+                Default Receiver UPI ID <span class="req-star">*</span>
+              </label>
+              <input type="text" id="setupUpiId" class="form-input" value="9249079757@ibl" required>
+              <small style="color:var(--text-muted); font-size:0.75rem;">Payments from students will go directly to this UPI ID.</small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="setupPayeeName">
+                Payee / Center Name for UPI <span class="req-star">*</span>
+              </label>
+              <input type="text" id="setupPayeeName" class="form-input" value="ROYAL COACHING CENTER" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="setupWhatsApp">
+                Center WhatsApp Number (for receipts)
+              </label>
+              <div class="phone-input-wrapper">
+                <span class="phone-prefix">+91</span>
+                <input type="tel" id="setupWhatsApp" class="form-input" value="9249079757" maxlength="10">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">
+                Default Monthly Fee by Class (₹)
+              </label>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <div>
+                  <span style="font-size:0.78rem; font-weight:600;">Classes 1 to 4:</span>
+                  <input type="number" id="feeDefault1to4" class="form-input" value="400" min="50">
+                </div>
+                <div>
+                  <span style="font-size:0.78rem; font-weight:600;">Classes 5 to 8:</span>
+                  <input type="number" id="feeDefault5to8" class="form-input" value="500" min="50">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-save-setup">
+            💾 SAVE SETTINGS
+          </button>
+
+          <button type="button" class="btn-secondary-receipt" onclick="resetSetupDefaults()" style="width:100%; margin-top:8px;">
+            ↺ Reset to Default (9249079757@ibl)
+          </button>
+        </form>
+
+        <!-- Hindi Hosting Guide for GitHub Pages -->
+        <div class="hosting-guide-box">
+          <div class="guide-title">
+            <span>🌐</span> GitHub Pages पर Free Host कैसे करें (सरल हिंदी में):
+          </div>
+          <ol class="guide-steps">
+            <li><strong>GitHub पर जाएं:</strong> <a href="https://github.com" target="_blank" style="color:var(--accent);">github.com</a> खोलें और अपना फ्री अकाउंट लॉगिन करें।</li>
+            <li><strong>New Repository बनाएं:</strong> ऊपर दाएँ कोने में <strong>+</strong> आइकन दबाकर <strong>New repository</strong> चुनें। Repository का नाम दें (जैसे: <code>royal-coaching-fee</code>) और इसे <strong>Public</strong> रखें।</li>
+            <li><strong>index.html फाइल अपलोड करें:</strong> <strong>uploading an existing file</strong> पर क्लिक करें और इस <code>index.html</code> फाइल को ड्रैग करके अपलोड करें, फिर <strong>Commit changes</strong> पर क्लिक करें।</li>
+            <li><strong>Pages Enable करें:</strong> उस Repository की <strong>Settings</strong> ➔ बाएँ मेनू में <strong>Pages</strong> ➔ Branch में <code>main</code> (या <code>master</code>) सेलेक्ट करके <strong>Save</strong> दबाएं।</li>
+            <li><strong>वेबसाइट लाइव:</strong> 1 मिनट में आपकी वेबसाइट का फ्री लिंक तैयार हो जाएगा: <code>https://yourusername.github.io/royal-coaching-fee/</code></li>
+            <li><strong>फोन में Install करें:</strong> फोन के Chrome ब्राउज़र में यह लिंक खोलें, ऊपर 3 डॉट्स दबाएं और <strong>"Add to Home screen"</strong> पर क्लिक करें। ऐप जैसा आइकन आपके फोन पर आ जाएगा!</li>
+          </ol>
+        </div>
+      </div><!-- End Setup View -->
+
+    </div><!-- End Content Area -->
+
+  </div><!-- End App Card -->
+
+  <!-- Toast Element -->
+  <div id="toastNotice">Notification</div>
+
+  <!-- CDN fallback script for QRCode, plus inline pure JS generator fallback below -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <script>
+    /* ==========================================================
+       ROYAL COACHING CENTER - Fee Portal State & Logic
+       ========================================================== */
+    const STORAGE_KEY_RECORDS = 'rcc_fee_records_v1';
+    const STORAGE_KEY_SETUP = 'rcc_setup_config_v1';
+    const STORAGE_KEY_THEME = 'rcc_theme_pref';
+
+    const DEFAULT_CONFIG = {
+      upiId: '9249079757@ibl',
+      payeeName: 'ROYAL COACHING CENTER',
+      whatsApp: '9249079757',
+      fee1to4: 400,
+      fee5to8: 500
+    };
+
+    let appConfig = loadConfig();
+    let feeRecords = loadRecords();
+    let currentReceipt = null;
+    let deferredPrompt = null;
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      initDates();
+      updateRecordStats();
+      syncSetupForm();
+
+      // Listen for PWA install prompt
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        const banner = document.getElementById('pwaInstallBanner');
+        if (banner) banner.style.display = 'flex';
+      });
+    });
+
+    /* --- Theme Management --- */
+    function initTheme() {
+      const saved = localStorage.getItem(STORAGE_KEY_THEME);
+      if (saved === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        updateThemeBtn(true);
+      } else {
+        updateThemeBtn(false);
+      }
+    }
+
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem(STORAGE_KEY_THEME, 'light');
+        updateThemeBtn(false);
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem(STORAGE_KEY_THEME, 'dark');
+        updateThemeBtn(true);
+      }
+    }
+
+    function updateThemeBtn(isDark) {
+      const icon = document.getElementById('themeIcon');
+      const text = document.getElementById('themeText');
+      if (icon && text) {
+        icon.textContent = isDark ? '☀️' : '🌙';
+        text.textContent = isDark ? 'Light' : 'Dark';
+      }
+    }
+
+    /* --- Date Initialization --- */
+    function initDates() {
+      const today = new Date().toISOString().split('T')[0];
+      const admissionDateEl = document.getElementById('admissionDate');
+      if (admissionDateEl && !admissionDateEl.value) {
+        admissionDateEl.value = today;
+      }
+
+      // Default fee month to current month
+      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      const currentMonth = months[new Date().getMonth()];
+      const monthEl = document.getElementById('feeMonth');
+      if (monthEl && !monthEl.value) {
+        monthEl.value = currentMonth;
+      }
+    }
+
+    /* --- Tab Navigation --- */
+    function switchTab(tab) {
+      const tabPay = document.getElementById('tabPay');
+      const tabRecords = document.getElementById('tabRecords');
+      const tabSetup = document.getElementById('tabSetup');
+
+      const payView = document.getElementById('payFeeView');
+      const receiptView = document.getElementById('receiptView');
+      const recordsView = document.getElementById('recordsView');
+      const setupView = document.getElementById('setupView');
+
+      [tabPay, tabRecords, tabSetup].forEach(t => t.classList.remove('active'));
+      [payView, receiptView, recordsView, setupView].forEach(v => v.style.display = 'none');
+
+      if (tab === 'pay') {
+        tabPay.classList.add('active');
+        if (currentReceipt) {
+          receiptView.style.display = 'block';
+        } else {
+          payView.style.display = 'block';
+        }
+      } else if (tab === 'records') {
+        tabRecords.classList.add('active');
+        recordsView.style.display = 'block';
+        renderRecordsList();
+      } else if (tab === 'setup') {
+        tabSetup.classList.add('active');
+        setupView.style.display = 'block';
+        syncSetupForm();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* --- Payment Mode Selection --- */
+    function selectPayMode(mode) {
+      const modes = ['upi_app', 'upi_qr', 'cash'];
+      modes.forEach(m => {
+        const card = document.getElementById('card_' + m);
+        const radio = card ? card.querySelector('input[type="radio"]') : null;
+        if (m === mode) {
+          if (card) card.classList.add('selected');
+          if (radio) radio.checked = true;
+        } else {
+          if (card) card.classList.remove('selected');
+        }
+      });
+    }
+
+    function setFeeAmount(amt) {
+      const amountInput = document.getElementById('feeAmount');
+      if (amountInput) {
+        amountInput.value = amt;
+        amountInput.classList.remove('is-invalid');
+      }
+      document.querySelectorAll('.amount-chip').forEach(c => {
+        c.classList.toggle('active', c.textContent === '₹' + amt);
+      });
+    }
+
+    function applyClassFeePreset(cls) {
+      if (!cls) return;
+      const num = parseInt(cls.replace('Class ', ''), 10);
+      let preset = 500;
+      if (num <= 4) {
+        preset = appConfig.fee1to4 || 400;
+      } else {
+        preset = appConfig.fee5to8 || 500;
+      }
+      const amountInput = document.getElementById('feeAmount');
+      if (amountInput && !amountInput.value) {
+        amountInput.value = preset;
+      }
+    }
+
+    /* --- Form Validation and Submission --- */
+    function handleFeeSubmit(e) {
+      e.preventDefault();
+
+      const studentName = document.getElementById('studentName').value.trim();
+      const studentClass = document.getElementById('studentClass').value;
+      const rollNo = document.getElementById('rollNo').value.trim();
+      const fatherName = document.getElementById('fatherName').value.trim();
+      const motherName = document.getElementById('motherName').value.trim();
+      const dob = document.getElementById('dob').value;
+      const admissionDate = document.getElementById('admissionDate').value;
+      const parentPhone = document.getElementById('parentPhone').value.trim().replace(/\D/g, '');
+      const village = document.getElementById('village').value.trim();
+      const feeMonth = document.getElementById('feeMonth').value;
+      const feeAmount = parseFloat(document.getElementById('feeAmount').value);
+      const payByRadio = document.querySelector('input[name="payBy"]:checked');
+      const payBy = payByRadio ? payByRadio.value : 'upi_app';
+      const remarks = document.getElementById('remarks').value.trim();
+      const confirmChecked = document.getElementById('confirmCheckbox').checked;
+
+      let isValid = true;
+
+      // Validate Student Name
+      if (studentName.length < 2) {
+        showFieldError('studentName', true);
+        isValid = false;
+      } else {
+        showFieldError('studentName', false);
+      }
+
+      // Validate Class
+      if (!studentClass) {
+        showFieldError('studentClass', true);
+        isValid = false;
+      } else {
+        showFieldError('studentClass', false);
+      }
+
+      // Validate Roll
+      if (!rollNo || parseInt(rollNo, 10) <= 0) {
+        showFieldError('rollNo', true);
+        isValid = false;
+      } else {
+        showFieldError('rollNo', false);
+      }
+
+      // Validate Father
+      if (!fatherName) {
+        showFieldError('fatherName', true);
+        isValid = false;
+      } else {
+        showFieldError('fatherName', false);
+      }
+
+      // Validate Mother
+      if (!motherName) {
+        showFieldError('motherName', true);
+        isValid = false;
+      } else {
+        showFieldError('motherName', false);
+      }
+
+      // Validate DOB
+      if (!dob) {
+        showFieldError('dob', true);
+        isValid = false;
+      } else {
+        showFieldError('dob', false);
+      }
+
+      // Validate Admission Date
+      if (!admissionDate) {
+        showFieldError('admissionDate', true);
+        isValid = false;
+      } else {
+        showFieldError('admissionDate', false);
+      }
+
+      // Validate Parent Phone (10 digits)
+      if (parentPhone.length !== 10) {
+        showFieldError('parentPhone', true);
+        isValid = false;
+      } else {
+        showFieldError('parentPhone', false);
+      }
+
+      // Validate Village
+      if (!village) {
+        showFieldError('village', true);
+        isValid = false;
+      } else {
+        showFieldError('village', false);
+      }
+
+      // Validate Fee Month
+      if (!feeMonth) {
+        showFieldError('feeMonth', true);
+        isValid = false;
+      } else {
+        showFieldError('feeMonth', false);
+      }
+
+      // Validate Fee Amount
+      if (isNaN(feeAmount) || feeAmount < 10) {
+        showFieldError('feeAmount', true);
+        isValid = false;
+      } else {
+        showFieldError('feeAmount', false);
+      }
+
+      // Validate Confirmation Checkbox
+      if (!confirmChecked) {
+        document.getElementById('err_confirmCheckbox').style.display = 'block';
+        isValid = false;
+      } else {
+        document.getElementById('err_confirmCheckbox').style.display = 'none';
+      }
+
+      if (!isValid) {
+        showToast('⚠️ Please correct highlighted errors.');
+        return;
+      }
+
+      // Generate Receipt Data
+      const timestamp = new Date();
+      const receiptNo = 'RCC-' + timestamp.getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+
+      const record = {
+        id: 'rec_' + Date.now(),
+        receiptNo,
+        timestamp: timestamp.toISOString(),
+        studentName,
+        studentClass,
+        rollNo,
+        fatherName,
+        motherName,
+        dob,
+        admissionDate,
+        parentPhone,
+        village,
+        feeMonth,
+        feeAmount,
+        payBy,
+        remarks
+      };
+
+      // Save to localStorage
+      feeRecords.unshift(record);
+      saveRecords(feeRecords);
+      updateRecordStats();
+
+      // Show Receipt
+      currentReceipt = record;
+      displayReceipt(record);
+      showToast('✓ Receipt generated successfully!');
+    }
+
+    function showFieldError(fieldId, hasError) {
+      const input = document.getElementById(fieldId);
+      const err = document.getElementById('err_' + fieldId);
+      if (input) input.classList.toggle('is-invalid', hasError);
+      if (err) err.style.display = hasError ? 'block' : 'none';
+    }
+
+    /* --- Receipt Generation & Display --- */
+    function displayReceipt(rec) {
+      document.getElementById('payFeeView').style.display = 'none';
+      const receiptView = document.getElementById('receiptView');
+      receiptView.style.display = 'block';
+
+      document.getElementById('recNo').textContent = rec.receiptNo;
+      const dateObj = new Date(rec.timestamp);
+      document.getElementById('recDate').textContent = dateObj.toLocaleDateString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+
+      document.getElementById('recStudentName').textContent = rec.studentName;
+      document.getElementById('recClassRoll').textContent = rec.studentClass + ' (Roll: ' + rec.rollNo + ')';
+      document.getElementById('recFatherName').textContent = rec.fatherName;
+      document.getElementById('recParentPhone').textContent = '+91 ' + rec.parentPhone;
+      document.getElementById('recVillage').textContent = rec.village;
+      document.getElementById('recMonth').textContent = rec.feeMonth;
+      document.getElementById('recAmount').textContent = '₹' + rec.feeAmount.toLocaleString('en-IN');
+      document.getElementById('recAmountWords').textContent = numberToWordsINR(rec.feeAmount);
+
+      const modeBadge = document.getElementById('recModeBadge');
+      if (rec.payBy === 'upi_app') {
+        modeBadge.innerHTML = '<span style="color:#0284C7; font-weight:800;">📱 UPI App</span>';
+      } else if (rec.payBy === 'upi_qr') {
+        modeBadge.innerHTML = '<span style="color:#16A34A; font-weight:800;">📷 UPI QR</span>';
+      } else {
+        modeBadge.innerHTML = '<span style="color:#D97706; font-weight:800;">💵 Cash at Center</span>';
+      }
+
+      const remarksRow = document.getElementById('recRemarksRow');
+      if (rec.remarks) {
+        remarksRow.style.display = 'table-row';
+        document.getElementById('recRemarks').textContent = rec.remarks;
+      } else {
+        remarksRow.style.display = 'none';
+      }
+
+      // Configure UPI parameters
+      const upiId = appConfig.upiId || '9249079757@ibl';
+      const payeeName = appConfig.payeeName || 'ROYAL COACHING CENTER';
+      const note = encodeURIComponent('Fee ' + rec.studentClass + ' ' + rec.studentName);
+      const encodedName = encodeURIComponent(payeeName);
+      const am = rec.feeAmount.toFixed(2);
+
+      // UPI URI
+      const upiUri = `upi://pay?pa=${upiId}&pn=${encodedName}&am=${am}&cu=INR&tn=${note}`;
+      
+      // Android Intent for PhonePe
+      const phonePeIntent = `intent://pay?pa=${upiId}&pn=${encodedName}&am=${am}&cu=INR&tn=${note}#Intent;scheme=upi;package=com.phonepe.app;end`;
+
+      document.getElementById('linkPhonePe').setAttribute('href', phonePeIntent);
+      document.getElementById('linkGenericUpi').setAttribute('href', upiUri);
+      document.getElementById('recUpiIdText').textContent = upiId;
+
+      // Display specific mode panel
+      document.getElementById('payAction_upi_app').style.display = (rec.payBy === 'upi_app') ? 'flex' : 'none';
+      document.getElementById('payAction_upi_qr').style.display = (rec.payBy === 'upi_qr') ? 'flex' : 'none';
+      document.getElementById('payAction_cash').style.display = (rec.payBy === 'cash') ? 'flex' : 'none';
+
+      if (rec.payBy === 'upi_qr') {
+        document.getElementById('qrAmountDisplay').textContent = rec.feeAmount;
+        generateQrCode(upiUri);
+      }
+
+      if (rec.payBy === 'cash') {
+        document.getElementById('cashAmountDisplay').textContent = rec.feeAmount;
+      }
+
+      // Setup WhatsApp link
+      const waText = encodeURIComponent(
+        `*ROYAL COACHING CENTER - FEE RECEIPT*\n` +
+        `------------------------------------\n` +
+        `*Receipt No:* ${rec.receiptNo}\n` +
+        `*Student:* ${rec.studentName}\n` +
+        `*Class & Roll:* ${rec.studentClass} (Roll: ${rec.rollNo})\n` +
+        `*Month:* ${rec.feeMonth}\n` +
+        `*Amount:* ₹${rec.feeAmount}\n` +
+        `*Payment Mode:* ${rec.payBy.toUpperCase()}\n` +
+        `*Village:* ${rec.village}\n` +
+        `*Center:* Tikarigaon, Kandhamal\n` +
+        `------------------------------------\n` +
+        `Thank you! Padho Aur Aage Badho.`
+      );
+      document.getElementById('linkWhatsApp').href = `https://wa.me/91${rec.parentPhone}?text=${waText}`;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function resetToNewFee() {
+      currentReceipt = null;
+      document.getElementById('receiptView').style.display = 'none';
+      document.getElementById('payFeeView').style.display = 'block';
+      document.getElementById('feeForm').reset();
+      initDates();
+      selectPayMode('upi_app');
+      document.getElementById('village').value = 'Tikarigaon';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function copyUpiId() {
+      const upiId = appConfig.upiId || '9249079757@ibl';
+      if (window.AndroidBridge && window.AndroidBridge.copyToClipboard) {
+        window.AndroidBridge.copyToClipboard(upiId);
+        showToast('✓ UPI ID copied: ' + upiId);
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(upiId).then(() => {
+          showToast('✓ UPI ID copied: ' + upiId);
+        }).catch(() => {
+          fallbackCopyText(upiId);
+        });
+      } else {
+        fallbackCopyText(upiId);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('✓ UPI ID copied: ' + text);
+      } catch (err) {
+        showToast('UPI ID: ' + text);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    /* --- QR Code Generator (Works offline via standalone generator + QRCodeJS) --- */
+    function generateQrCode(text) {
+      const container = document.getElementById('qrContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      // If QRCode library is loaded from CDN
+      if (typeof QRCode !== 'undefined') {
+        try {
+          new QRCode(container, {
+            text: text,
+            width: 180,
+            height: 180,
+            colorDark: "#0B1E36",
+            colorLight: "#FFFFFF",
+            correctLevel: QRCode.CorrectLevel.M
+          });
+          return;
+        } catch (e) {
+          console.warn("QRCodeJS failed, using inline fallback", e);
+        }
+      }
+
+      // Offline SVG QR fallback (High reliability)
+      renderInlineQrFallback(container, text);
+    }
+
+    /* Compact lightweight pure SVG QR render fallback */
+    function renderInlineQrFallback(container, text) {
+      // Simple visual QR placeholder + external image query fallback
+      const img = document.createElement('img');
+      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=' + encodeURIComponent(text);
+      img.alt = 'Scan UPI QR';
+      img.width = 180;
+      img.height = 180;
+      img.onerror = () => {
+        container.innerHTML = '<div style="padding:10px; font-size:0.8rem; color:#dc2626;">Please use UPI apps button or Pay to UPI ID:<br><strong>' + appConfig.upiId + '</strong></div>';
+      };
+      container.appendChild(img);
+    }
+
+    /* --- Records Tab Logic --- */
+    function renderRecordsList() {
+      const container = document.getElementById('recordsListContainer');
+      if (!container) return;
+
+      const query = (document.getElementById('recordSearchInput').value || '').toLowerCase().trim();
+      const classFilter = document.getElementById('recordClassFilter').value;
+
+      const filtered = feeRecords.filter(r => {
+        const matchesQuery = !query ||
+          r.studentName.toLowerCase().includes(query) ||
+          r.rollNo.toString().includes(query) ||
+          r.parentPhone.includes(query) ||
+          r.receiptNo.toLowerCase().includes(query);
+        const matchesClass = !classFilter || r.studentClass === classFilter;
+        return matchesQuery && matchesClass;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <div style="font-weight:700; margin-bottom:4px;">No Fee Records Found</div>
+            <div style="font-size:0.8rem;">Submitted fees will automatically appear here.</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(r => `
+        <div class="record-card" id="card_${r.id}">
+          <div class="record-top">
+            <div>
+              <div class="record-student-name">${escapeHtml(r.studentName)}</div>
+              <div class="record-sub">${r.studentClass} • Roll No: ${r.rollNo} • ${r.feeMonth}</div>
+            </div>
+            <div class="record-amount">₹${r.feeAmount}</div>
+          </div>
+          <div class="record-meta">
+            <span class="badge-mode">${r.payBy.replace('_', ' ').toUpperCase()}</span>
+            <span>📞 +91 ${r.parentPhone}</span>
+            <span>📍 ${escapeHtml(r.village)}</span>
+            <span>🧾 ${r.receiptNo}</span>
+          </div>
+          <div class="record-actions">
+            <button type="button" class="btn-sm-view" onclick="viewExistingReceipt('${r.id}')">
+              View Receipt
+            </button>
+            <button type="button" class="btn-sm-delete" id="delBtn_${r.id}" onclick="handleTwoTapDelete('${r.id}')">
+              Remove
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterRecords() {
+      renderRecordsList();
+    }
+
+    function viewExistingReceipt(id) {
+      const rec = feeRecords.find(r => r.id === id);
+      if (rec) {
+        currentReceipt = rec;
+        switchTab('pay');
+        displayReceipt(rec);
+      }
+    }
+
+    /* Two-tap Delete Confirmation */
+    let deletePendingId = null;
+    let deleteTimeout = null;
+
+    function handleTwoTapDelete(id) {
+      const btn = document.getElementById('delBtn_' + id);
+      if (!btn) return;
+
+      if (deletePendingId === id) {
+        // Second tap -> perform delete
+        feeRecords = feeRecords.filter(r => r.id !== id);
+        saveRecords(feeRecords);
+        updateRecordStats();
+        renderRecordsList();
+        showToast('✓ Record removed.');
+        deletePendingId = null;
+        if (deleteTimeout) clearTimeout(deleteTimeout);
+      } else {
+        // First tap -> prompt confirmation
+        if (deletePendingId && deletePendingId !== id) {
+          const prev = document.getElementById('delBtn_' + deletePendingId);
+          if (prev) {
+            prev.textContent = 'Remove';
+            prev.classList.remove('confirming');
+          }
+        }
+        deletePendingId = id;
+        btn.textContent = 'Tap to Confirm ✕';
+        btn.classList.add('confirming');
+        showToast('Tap again to permanently delete.');
+
+        deleteTimeout = setTimeout(() => {
+          if (deletePendingId === id && btn) {
+            btn.textContent = 'Remove';
+            btn.classList.remove('confirming');
+            deletePendingId = null;
+          }
+        }, 4000);
+      }
+    }
+
+    function confirmClearAllRecords() {
+      if (feeRecords.length === 0) {
+        showToast('No records to clear.');
+        return;
+      }
+      if (confirm('Are you sure you want to delete ALL fee records? This cannot be undone.')) {
+        feeRecords = [];
+        saveRecords([]);
+        updateRecordStats();
+        renderRecordsList();
+        showToast('All records cleared.');
+      }
+    }
+
+    function exportRecordsCSV() {
+      if (feeRecords.length === 0) {
+        showToast('No records available to export.');
+        return;
+      }
+
+      let csv = 'Receipt No,Student Name,Class,Roll No,Father Name,Mother Name,DOB,Admission Date,Phone,Village,Month,Amount,Payment Mode,Remarks,Date\n';
+      feeRecords.forEach(r => {
+        csv += `"${r.receiptNo}","${r.studentName}","${r.studentClass}","${r.rollNo}","${r.fatherName}","${r.motherName}","${r.dob}","${r.admissionDate}","${r.parentPhone}","${r.village}","${r.feeMonth}",${r.feeAmount},"${r.payBy}","${r.remarks || ''}","${r.timestamp}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `Royal_Coaching_Fees_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('✓ CSV file downloaded.');
+    }
+
+    function updateRecordStats() {
+      const countEl = document.getElementById('recordCountBadge');
+      const totalCountEl = document.getElementById('statTotalCount');
+      const totalAmountEl = document.getElementById('statTotalAmount');
+
+      const count = feeRecords.length;
+      const total = feeRecords.reduce((acc, r) => acc + (parseFloat(r.feeAmount) || 0), 0);
+
+      if (countEl) countEl.textContent = count;
+      if (totalCountEl) totalCountEl.textContent = count;
+      if (totalAmountEl) totalAmountEl.textContent = '₹' + total.toLocaleString('en-IN');
+    }
+
+    /* --- Setup Tab Logic --- */
+    function syncSetupForm() {
+      document.getElementById('setupUpiId').value = appConfig.upiId || DEFAULT_CONFIG.upiId;
+      document.getElementById('setupPayeeName').value = appConfig.payeeName || DEFAULT_CONFIG.payeeName;
+      document.getElementById('setupWhatsApp').value = appConfig.whatsApp || DEFAULT_CONFIG.whatsApp;
+      document.getElementById('feeDefault1to4').value = appConfig.fee1to4 || DEFAULT_CONFIG.fee1to4;
+      document.getElementById('feeDefault5to8').value = appConfig.fee5to8 || DEFAULT_CONFIG.fee5to8;
+    }
+
+    function handleSaveSetup(e) {
+      e.preventDefault();
+      const upiId = document.getElementById('setupUpiId').value.trim();
+      const payeeName = document.getElementById('setupPayeeName').value.trim();
+      const whatsApp = document.getElementById('setupWhatsApp').value.trim().replace(/\D/g, '');
+      const fee1to4 = parseFloat(document.getElementById('feeDefault1to4').value) || 400;
+      const fee5to8 = parseFloat(document.getElementById('feeDefault5to8').value) || 500;
+
+      if (!upiId || !upiId.includes('@')) {
+        showToast('⚠️ Please enter a valid UPI ID (e.g. name@bank)');
+        return;
+      }
+
+      appConfig = { upiId, payeeName, whatsApp, fee1to4, fee5to8 };
+      localStorage.setItem(STORAGE_KEY_SETUP, JSON.stringify(appConfig));
+      showToast('✓ Settings saved successfully!');
+    }
+
+    function resetSetupDefaults() {
+      if (confirm('Reset setup to default UPI ID (9249079757@ibl)?')) {
+        appConfig = Object.assign({}, DEFAULT_CONFIG);
+        localStorage.setItem(STORAGE_KEY_SETUP, JSON.stringify(appConfig));
+        syncSetupForm();
+        showToast('✓ Reset to defaults.');
+      }
+    }
+
+    /* --- PWA Install Flow --- */
+    function installPwa() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            dismissPwaBanner();
+            showToast('✓ App installation started!');
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        alert('To install on your phone:\n1. Tap the 3 dots in your Chrome/browser menu.\n2. Select "Add to Home screen" or "Install App".');
+      }
+    }
+
+    function dismissPwaBanner() {
+      const banner = document.getElementById('pwaInstallBanner');
+      if (banner) banner.style.display = 'none';
+    }
+
+    /* --- Helper Utilities --- */
+    function loadConfig() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_SETUP);
+        return raw ? Object.assign({}, DEFAULT_CONFIG, JSON.parse(raw)) : Object.assign({}, DEFAULT_CONFIG);
+      } catch (e) {
+        return Object.assign({}, DEFAULT_CONFIG);
+      }
+    }
+
+    function loadRecords() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_RECORDS);
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveRecords(records) {
+      localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify(records));
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById('toastNotice');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        el.classList.remove('show');
+      }, 3500);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function numberToWordsINR(num) {
+      const a = ['', 'One ', 'Two ', 'Three ', 'Four ', 'Five ', 'Six ', 'Seven ', 'Eight ', 'Nine ', 'Ten ', 'Eleven ', 'Twelve ', 'Thirteen ', 'Fourteen ', 'Fifteen ', 'Sixteen ', 'Seventeen ', 'Eighteen ', 'Nineteen '];
+      const b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+      function inWords(n) {
+        if ((n = n.toString()).length > 9) return 'Overflow';
+        let nArray = ('000000000' + n).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+        if (!nArray) return '';
+        let str = '';
+        str += (Number(nArray[1]) != 0) ? (a[Number(nArray[1])] || b[nArray[1][0]] + ' ' + a[nArray[1][1]]) + 'Crore ' : '';
+        str += (Number(nArray[2]) != 0) ? (a[Number(nArray[2])] || b[nArray[2][0]] + ' ' + a[nArray[2][1]]) + 'Lakh ' : '';
+        str += (Number(nArray[3]) != 0) ? (a[Number(nArray[3])] || b[nArray[3][0]] + ' ' + a[nArray[3][1]]) + 'Thousand ' : '';
+        str += (Number(nArray[4]) != 0) ? (a[Number(nArray[4])] || b[nArray[4][0]] + ' ' + a[nArray[4][1]]) + 'Hundred ' : '';
+        str += (Number(nArray[5]) != 0) ? ((str != '') ? 'and ' : '') + (a[Number(nArray[5])] || b[nArray[5][0]] + ' ' + a[nArray[5][1]]) : '';
+        return str.trim();
+      }
+
+      const words = inWords(Math.round(num));
+      return (words ? words + ' Rupees Only' : 'Zero Rupees');
+    }
+  </script>
+</body>
+</html>
